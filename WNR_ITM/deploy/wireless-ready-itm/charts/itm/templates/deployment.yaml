@@ -1,0 +1,71 @@
+# Copyright 2022 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "itm.fullname" . }}
+  labels:
+    {{- include "itm.labels" . | nindent 4 }}
+  namespace: {{ .Values.global.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "itm.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "itm.selectorLabels" . | nindent 8 }}
+    spec:
+      #restartPolicy: "OnFailure"
+      containers:
+      - image: "intel/{{ .Values.image.repository }}:{{ .Values.image.Version }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: {{ .Chart.Name }}
+        env:
+          - name: LOCAL_HOST
+            value: "{{ .Values.serverIP }}"
+          - name: HOST_IP
+            value: "{{ .Values.hostIp }}"
+          - name: INFLUXDB_PORT
+            value: "{{ .Values.influxdbPort }}"
+          - name: NAMESPACE
+            value: "{{ .Values.global.namespace }}"
+          - name: GRAFANA_HOST
+            value: "{{ .Values.grafanaHost }}"
+          - name: GRAFANA_PASSWORD
+            value: "{{ .Values.grafanaPassword }}"
+          - name: EXTERNAL_ADDRESS
+            value: "{{ .Values.externalAddress }}"
+          - name: SERVER_PORT
+            value: "30300"
+        volumeMounts:
+        - mountPath: /app/camera_config.json
+          name: itm-config
+          readOnly: true
+          subPath: camera_config.json
+        - mountPath: /tmp
+          name: tmp
+        securityContext:
+          readOnlyRootFilesystem: true
+      nodeSelector: 
+        feature.node.kubernetes.io/cpu-cpuid.AVX512VNNI: 'true'
+        feature.node.kubernetes.io/cpu-cpuid.AVX2: 'true'
+      volumes:
+      - configMap:
+          name: itm-config
+        name: itm-config
+      - name: tmp
