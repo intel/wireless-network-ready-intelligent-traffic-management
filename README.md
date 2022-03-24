@@ -42,6 +42,7 @@ Once you have installed the Intel® Smart Edge Open Developer Experience Kit, se
 
 [Configure & Download](http://software.intel.com/iot/edgesoftwarehub/download/home/ri/wireless_network_ready_intelligent_traffic_management)
 
+GitHub Repository: https://github.com/intel/wireless-network-ready-intelligent-traffic-management
 
 
 | Table 1 |  |
@@ -390,16 +391,10 @@ You can proceed with the steps presented using either edgesoftware sources or Gi
 ### Setup
 Change the directory to repository path with one of the following options.
 
-For Edgesoftware:
-
-```
-cd /home/smartedge-open/wireless_network_ready_intelligent_traffic_management/Wireless_NetworkReady_Intelligent_Traffic_Management_21.12/Wireless_NetworkReady_Intelligent_Traffic_Management
-```
-
 For GitHub:
 
 ```
-git clone
+git clone https://github.com/intel/wireless-network-ready-intelligent-traffic-management.git
 cd wireless_network_ready_intelligent_traffic_management/
 ```
 
@@ -437,7 +432,7 @@ cd <REPOSITORY_PATH>/WNR_ITM/ITM
 ./build_image.sh   # The local Docker image will be built on the Ubuntu machine.
 ```
 
-Install Helm with the following commands:
+Install locally with the following commands:
 
 1. Get Grafana password:
 
