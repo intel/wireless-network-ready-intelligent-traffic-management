@@ -386,7 +386,7 @@ ease the process of introducing updates and their integration with Reference Imp
 After you have installed Intel® Smart Edge Open Developer Experience Kit from Prerequisites, you can build your own Wireless-Network Ready
 Intelligent Traffic Management Docker image using the following instructions.
 
-You can proceed with the steps presented using either edgesoftware sources or GitHub sources: WNR-ITM<github_link>
+You can proceed with the steps presented using GitHub sources: [Wireless Network-Ready Intelligent Traffic Management](https://github.com/intel/wireless-network-ready-intelligent-traffic-management)
 
 ### Setup
 Change the directory to repository path with one of the following options.
