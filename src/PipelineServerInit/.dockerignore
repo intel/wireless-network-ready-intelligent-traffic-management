@@ -1,0 +1,17 @@
+# build artifacts
+**/__pycache__
+**/*.swo
+**/*.swp
+
+# READMEs
+*.md
+
+# Docker and orchestrator specific files
+Dockerfile
+*.yml
+*.yaml
+*_spec.json
+
+# Unit tests
+tests
+htmlcov
