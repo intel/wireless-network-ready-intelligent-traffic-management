@@ -13,7 +13,7 @@ MarkupSafe==2.0.1
 msgpack==0.6.1
 numpy==1.22.2
 packaging==21.2
-pip==22.0.3
+pip==23.3
 pycairo==1.16.2
 pycparser==2.21
 PyGObject==3.36.0
